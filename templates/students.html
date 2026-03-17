@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students List</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            margin-top: 40px;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📋 All Students</h2>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Attendance</th>
+        <th>Fees</th>
+        <th>Status</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student[0] }}</td>
+        <td>{{ student[1] }}</td>
+        <td>{{ student[2] }}%</td>
+        <td>{{ student[3] }}</td>
+
+        <td>
+            {% if student[2]|int < 90 and student[3] == 'Due' %}
+                Low Attendance ⚠️ + Fees Pending 💰
+            {% elif student[2]|int < 90 %}
+                Low Attendance ⚠️
+            {% elif student[3] == 'Due' %}
+                Fees Pending 💰
+            {% else %}
+                OK ✅
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
