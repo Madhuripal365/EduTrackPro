@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coaching System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            width: 300px;
+            margin: auto;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📚 Coaching Student Form</h2>
+
+<form action="/add" method="post">
+
+    <input type="text" name="name" placeholder="Enter Name" required>
+
+    <input type="email" name="email" placeholder="Enter Email" required>
+
+    <input type="number" name="attendance" placeholder="Attendance (days)" required>
+
+    <select name="fees">
+        <option value="Paid">Fees Paid</option>
+        <option value="Due">Fees Due</option>
+    </select>
+
+    <button type="submit">Add Student</button>
+
+</form>
+
+</body>
+</html>
