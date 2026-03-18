@@ -75,9 +75,9 @@ function sendMail(event) {
 
 <body>
 
-<h2>📚 Coaching Student Form</h2>
+<<h2>📚 Coaching Student Form</h2>
 
-<form action="/add" method="post">
+<form action="/add" method="post" onsubmit="sendMail(event)">
 
     <input type="text" name="name" placeholder="Enter Name" required>
 
