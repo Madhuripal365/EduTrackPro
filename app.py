@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request
 import sqlite3
+import os
 
 app = Flask(__name__)
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'students.db')
 
 @app.route('/')
 def home():
@@ -14,10 +18,9 @@ def add_student():
     attendance = request.form['attendance']
     fees = request.form['fees']
 
-    conn = sqlite3.connect('students.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    # Table create
     cur.execute("""
     CREATE TABLE IF NOT EXISTS students (
         name TEXT,
@@ -27,7 +30,6 @@ def add_student():
     )
     """)
 
-    # Insert data
     cur.execute("INSERT INTO students VALUES (?, ?, ?, ?)",
                 (name, email, attendance, fees))
 
@@ -36,10 +38,9 @@ def add_student():
 
     return "Student Added Successfully ✅"
 
-
 @app.route('/students')
 def show_students():
-    conn = sqlite3.connect('students.db')
+    conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute("SELECT * FROM students")
@@ -49,4 +50,5 @@ def show_students():
 
     return render_template('students.html', students=data)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)  # Only for local testing
