@@ -58,15 +58,19 @@ def add_student():
     """)
 
     # Insert data
-    cur.execute("INSERT INTO students VALUES (?, ?, ?, ?)",
-                (name, email, attendance, fees))
+cur.execute("INSERT INTO students VALUES (?, ?, ?, ?)",
+            (name, email, attendance, fees))
+
+# Email send (safe)
+try:
     send_email(email, name)
+except Exception as e:
+    print("Email Error:", e)
 
-    conn.commit()
-    conn.close()
+conn.commit()
+conn.close()
 
-    return "Student Added Successfully ✅"
-
+return "Student Added Successfully ✅"
 
 @app.route('/students')
 def show_students():
