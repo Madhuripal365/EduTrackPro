@@ -1,7 +1,37 @@
+import smtplib
+from email.mime.text import MIMEText
+
+
+
+
 from flask import Flask, render_template, request
 import sqlite3
 
 app = Flask(__name__)
+
+def send_email(to_email, name):
+    sender_email = "palmadhuri784@gmail.com"
+    password = "ovux kltz eipx wyps"
+
+    subject = "Student Added Successfully"
+    body = f"Hello {name},\n\nYou have been successfully added to EduTrackPro."
+
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender_email
+    msg['To'] = to_email
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, password)
+        server.sendmail(sender_email, to_email, msg.as_string())
+        server.quit()
+        print("Email sent successfully")
+    except Exception as e:
+        print("Error:", e)
+
+
 
 @app.route('/')
 def home():
@@ -30,6 +60,7 @@ def add_student():
     # Insert data
     cur.execute("INSERT INTO students VALUES (?, ?, ?, ?)",
                 (name, email, attendance, fees))
+    send_email(email, name)
 
     conn.commit()
     conn.close()
