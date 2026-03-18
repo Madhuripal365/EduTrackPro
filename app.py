@@ -61,11 +61,7 @@ def add_student():
     cur.execute("INSERT INTO students VALUES (?, ?, ?, ?)",
                 (name, email, attendance, fees))
 
-    # Email send (safe)
-    try:
-        send_email(email, name)
-    except Exception as e:
-        print("Email Error:", e)
+    print("Email feature temporarily disabled")
 
     conn.commit()
     conn.close()
