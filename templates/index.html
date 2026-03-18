@@ -45,6 +45,34 @@
     </style>
 </head>
 
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+    emailjs.init("_7Nd_LDIWtUPBaGMH");
+})();
+
+function sendMail(event) {
+    event.preventDefault();
+
+    let params = {
+        name: document.querySelector('[name="name"]').value,
+        email: document.querySelector('[name="email"]').value
+    };
+
+    emailjs.send("service_zty9c8n", "template_gw6pl19", params)
+    .then(function(res){
+        alert("Student Added + Email Sent ✅");
+        document.querySelector("form").submit();
+    })
+    .catch(function(err){
+        alert("Email failed ❌");
+    });
+}
+</script>
+
+
 <body>
 
 <h2>📚 Coaching Student Form</h2>
