@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def send_email(to_email, name):
     sender_email = "palmadhuri784@gmail.com"
-    password = "ovux kltz eipx wyps"
+    password = "ovuxkltzeipxwyps"
 
     subject = "Student Added Successfully"
     body = f"Hello {name},\n\nYou have been successfully added to EduTrackPro."
